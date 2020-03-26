@@ -127,9 +127,9 @@ def output(amount):
     Label(opt, text=f"{b}", font=Font(weight='bold')).place(x=275, y=110)
     Label(opt, text="Taxable Amount", font=Font(weight='bold')).place(x=350, y=110)
     # Final Tax
-    Label(opt, text="5,00,000  to  7,00,000").place(x=50, y=200)
+    Label(opt, text="5,00,000  to  7,50,000").place(x=50, y=200)
     Label(opt, text="10 %").place(x=220, y=200)
-    Label(opt, text=" 7,00,000 to 10,00,000").place(x=50, y=220)
+    Label(opt, text=" 7,50,000 to 10,00,000").place(x=50, y=220)
     Label(opt, text="15 %").place(x=220, y=220)
     Label(opt, text="10,00,000 to 20,00,000").place(x=50, y=240)
     Label(opt, text="20 %").place(x=220, y=240)
