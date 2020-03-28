@@ -1,8 +1,10 @@
 '''
-    Edit sender mail and sender pasword before runnig code
+    Edit sender mail (line no. 202) and sender pasword (line no. 203)
+                and smtp server (line no. 219) before runnig code
 '''
 """
-This code will calculate tax and inform you using email
+This code will calculate tax and inform you using email 
+        ( FOR SENDING MAIL INTERNET CONNECTION IS MUST )
 tax calculate on basis
 1) You have to pay for 80c Investment, health Insurance, home loan
 2) health Insurance is 30,000 and it is compulsary
@@ -54,7 +56,7 @@ def reset():
     Invested80c.set("")
     LoanAmt.set("")
 def tax():
-    if ((TotalIncome.get() != "") or (Invested80c.get() != "") or (LoanAmt.get() != "")):
+    if ((TotalIncome.get() != "") and (Invested80c.get() != "") and (LoanAmt.get() != "")):
         if (TotalIncome.get().isdigit() and Invested80c.get().isdigit() and LoanAmt.get().isdigit()):
             totalIc = int(TotalIncome.get())
             invest80 = int(Invested80c.get())
@@ -94,7 +96,7 @@ def tax():
                         Invested80c.set("")
                 else:
                     messagebox.showinfo("Sorry", "You can't invest this much as you have to pay for HEALTH INSURANCE(30,000).")
-                    Invested80c.set("")
+                    Invested80c.set("0")
             else:
                 messagebox.showinfo("Invalid", "Total income should be atleast greater then HEALTH INSURANCE(30,000).")
                 TotalIncome.set("")
@@ -207,7 +209,10 @@ def sendEmail():
     message["From"] = sender_email
     message["To"] = receiver_email
     # Create your message
-    msg = f"Hello Mr.{name.get()}, You have {taxVar.get()} to pay...."
+    if (taxVar.get() == 0):
+        msg = f"Hello Mr.{name.get()}, You have NO TAX to pay...."
+    else:
+        msg = f"Hello Mr.{name.get()}, You have {taxVar.get()} to pay...."
     # Turn to MIMEText objects
     mimeObj = MIMEText(msg, "plain")
     # Attach MIMEMultipart message to message
