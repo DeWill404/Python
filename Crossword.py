@@ -1,37 +1,105 @@
-# import enchant
+import enchant		# for getting meaningfull word
 
-# en = enchant.Dict("en_US")
+en = enchant.Dict("en_US")	# Setting Language and accent
+
+# Opening crossword file
+file = open("file.txt", "r+")
+
+# Make 2D list
+crossword = file.read().split("\n")
+matrix = []
+for row in crossword:
+	matrix.append(row.split(" "))
+
+# Getting row and coloumn
+row = len(matrix)
+coloum = len(matrix[0])
+
+# Max length
+length = row if row>coloum else coloum
+
+# Answer list
+combine = []
+
+# This code will iterate around character A at position (x,y)
+# 		make all combination of it
+
+for k in range(row):		# x of character A
+	for m in range(coloum):		# y of character A
+		for i in range(row):		# Move along row of A
+			for j in range(coloum):		# Move along coloumn of A
+
+				# Make each combination of length 2 to max
+				for n in range(1, length+1):
+
+					word = matrix[k][m]	  # Temporary variable for word
+					x,y = i,j			  # Temporary reference of i & j
+					
+					# left
+					if (i==k) and (j+1==m):
+						while y>-1 and len(word)<n:
+							word+=matrix[x][y]
+							y-=1
+
+					# right
+					elif (i==k) and (j-1==m):
+						while y<coloum and len(word)<n:
+							word+=matrix[x][y]
+							y+=1
+						
+					# top-left
+					elif (i+1==k) and (j+1==m):
+						while x>-1 and y>-1 and len(word)<n:
+							word+=matrix[x][y]
+							y-=1
+							x-=1
+
+					# top-right
+					elif (i+1==k) and (j-1==m):
+						while y<coloum and x>-1 and len(word)<n:
+							word+=matrix[x][y]
+							x-=1
+							y+=1
+
+					# top
+					elif (i+1==k) and (j==m):
+						while x>-1 and len(word)<=n:
+							word+=matrix[x][y]
+							x-=1
+
+					# bottom-left
+					elif (i-1==k) and (j+1==m):
+						while x<row and y>-1 and len(word)<n:
+							word+=matrix[x][y]
+							x+=1
+							y-=1
+
+					# bottom-right
+					elif (i-1==k) and (j-1==m):
+						while y<coloum and x<row and len(word)<n:
+							word+=matrix[x][y]
+							x+=1
+							y+=1
+
+					# bottom
+					elif (i-1==k) and (j==m):
+						while x<row and len(word)<n:
+							word += matrix[x][y]
+							x+=1
+						
+					if len(word)>1:
+						if en.check(word):
+							if word not in combine:
+								combine.append(word)
 
 
-# f = open("file.txt", 'r')
+file.write("\n\n")
+file.write(f"No. of words : {len(combine)}")
+file.write("\n\n")
+for word in combine:
+	file.write(word+"\t")
 
-# content = f.read().split()
 
-# print(content)
+print(combine)
+print(len(combine))
 
-# for word in content:
-#   print("Valid" if en.check(word) else "Invalid")
-
-# L = [['A', 'B'],['C', 'D']]
-# l = len(L)
-# for k in range(l):
-# 	for m in range(l):
-# 		for i in range(l):
-# 			for j in range(l):
-# 				if j!=m or i!=k:
-# 					print(L[k][m],L[i][j],sep=",",end=" ")
-# 		print(end="\n")
-
-L = [['A', 'B', 'C'],['D', 'E', 'F'],['G', 'H', 'I']]
-l = len(L)
-for k in range(l):
-	for m in range(l):
-		for i in range(l):
-			for j in range(l):
-				if (i+1==k or i-1==k) and (j+1==m or j-1==m):
-					print(L[k][m],L[i][j],sep=",",end=" ")
-				elif (i+1==k or i-1==k) and (j==m):
-					print(L[k][m],L[i][j],sep=",",end=" ")
-				elif (i==k) and (j+1==m or j-1==m):
-					print(L[k][m],L[i][j],sep=",",end=" ")
-		print(end="\n")
