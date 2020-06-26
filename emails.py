@@ -2,10 +2,11 @@
 import ssl,smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import getpass as password
 
-sender_email = "sethdane420@gmail.com"
-receiver_email = "mr.irshad.siddique@gmail.com"
-password = "Siddique420"
+sender_email = input("Sender email : ")
+password = password.getpass()
+receiver_email = input("Reciever email : ")
 
 message = MIMEMultipart("alternative")
 message["Subject"] = "Python Assignmnt"

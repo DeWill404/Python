@@ -241,7 +241,5 @@ def check_mail():
     else:
         messagebox.showwarning("Invalid", "Emails or Name are empty.")
 
-    # sendEmail(totalTax)
-
 
 tk.mainloop()
