@@ -1,6 +1,6 @@
 '''
-    Edit sender mail (line no. 202) and sender pasword (line no. 203)
-                and smtp server (line no. 219) before runnig code
+    Edit sender mail (line no. 204) and sender pasword (line no. 205)
+                and smtp server (line no. 221) before runnig code
 '''
 """
 This code will calculate tax and inform you using email 
@@ -23,6 +23,7 @@ from tkinter import *
 from tkinter import ttk, filedialog, messagebox
 import tkinter as tk
 from tkinter.font import Font
+
 # Email Package
 import ssl,smtplib
 from email.mime.text import MIMEText
@@ -227,7 +228,7 @@ def sendEmail():
         messagebox.showinfo("Successful", "Email Sent..")
     except:
         messagebox.showinfo("Sorry", "Unable to send message.\n TRY AGAIN")
-    server.quit()
+    SERVER_STATUS.quit()
 
 
 def check_mail():

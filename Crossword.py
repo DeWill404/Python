@@ -1,15 +1,22 @@
+# This code required Third party modlue
+#	following code for line 1 to 7
+# 	Check if required module is present in system or not...
+from Dependencies import check_module
+check_module({'pyenchant'})
+# Module Checking end...
+# Remove This part if not required.... :)
+
 import enchant		# for getting meaningfull word
 
 en = enchant.Dict("en_US")	# Setting Language and accent
 
 # Opening crossword file
+# Notice You should have file.txt file before runing code
 file = open("file.txt", "r+")
 
 # Make 2D list
 crossword = file.read().split("\n")
-matrix = []
-for row in crossword:
-	matrix.append(row.split(" "))
+matrix = [ row.split(" ") for row in crossword ]
 
 # Getting row and coloumn
 row = len(matrix)
